@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #      driver-class-name: com.mysql.cj.jdbc.Driver
+      #      url: jdbc:mysql://localhost:3306/renren_security?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      url: jdbc:oracle:thin:@192.168.1.47:1521:gkyy
+      username: teamwork
+      password: GKYYteamwork8001
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #Oracle需要打开注释validation-query
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        #login-username: admin
+        #login-password: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: false
+        wall:
+          config:
+            multi-statement-allow: true
+
+file-path-prefix: sys_file_path_prefix
+##多数据源的配置，需要引用renren-dynamic-datasource
+#dynamic:
+#  datasource:
+#    slave1:
+#      driver-class-name: oracle.jdbc.driver.OracleDriver
+#      url: jdbc:oracle:thin:@192.168.1.18:1521/CRDS3DB
+#      username: usergkyy
+#      password: 1ghsyshx9113xxk-8001
+#      validation-query: SELECT 1 FROM DUAL
+#    slave2:
+#      driver-class-name: org.postgresql.Driver
+#      url: jdbc:postgresql://localhost:5432/renren_security
+#      username: renren
+#      password: 123456
